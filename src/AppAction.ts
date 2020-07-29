@@ -1,7 +1,12 @@
-export const NEXT = 'NEXT';
+export const START = 'START';
+export const END = 'END';
 
-interface NextAction {
-    type: typeof NEXT
+interface StartAction {
+    type: typeof START
 }
 
-export type AppActionTypes = NextAction
+interface EndAction {
+    type: typeof END
+}
+
+export type AppActionTypes = StartAction | EndAction

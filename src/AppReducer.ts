@@ -6,7 +6,9 @@ const initialState: AppState = {}
 
 function appReducer(state = initialState, action: AppActionTypes): AppState {
     switch (action.type) {
-        case "NEXT":
+        case "START":
+            return {...state}
+        case "END":
             return {...state}
         default:
             return state
