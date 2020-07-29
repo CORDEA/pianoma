@@ -1,0 +1,14 @@
+.Button {
+    display: table;
+    width: 100px;
+    height: 44px;
+    margin: 32px 32px 32px auto;
+    border-radius: 4px;
+    background: dodgerblue;
+}
+
+.Button > p {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
