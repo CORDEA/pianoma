@@ -1,18 +1,9 @@
 import React from "react";
 
 import "./KeyboardPart.css"
+import {NOTES} from "./NotesGenerator";
 
-const whiteKeyWidth = 46
-
-const notes = [
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "A",
-    "B"
-]
+const WHITE_KEY_WIDTH = 46
 
 interface Props {
     startNote: string
@@ -21,19 +12,19 @@ interface Props {
 }
 
 function KeyboardPart(props: Props) {
-    const noteIndex = notes.indexOf(props.startNote)
+    const noteIndex = NOTES.indexOf(props.startNote)
     const whiteKeys = Array.from(Array(props.numberOfBlackKeys + 1).keys()).map(i =>
         <div className="KeyboardPart-whiteKey"
-             id={notes[noteIndex + i] + props.startLevel}
-             style={{width: whiteKeyWidth}}
+             id={NOTES[noteIndex + i] + props.startLevel}
+             style={{width: WHITE_KEY_WIDTH}}
              key={i}/>
     )
     const blackKeys = Array.from(Array(props.numberOfBlackKeys).keys()).map(i =>
         <div className="KeyboardPart-blackKey"
-             id={notes[noteIndex + i] + "#" + props.startLevel}
+             id={NOTES[noteIndex + i] + "#" + props.startLevel}
              key={i}/>
     )
-    const width = whiteKeyWidth * (props.numberOfBlackKeys + 1)
+    const width = WHITE_KEY_WIDTH * (props.numberOfBlackKeys + 1)
     return (
         <div className="KeyboardPart" style={{width: width}}>
             <div className="KeyboardPart-whiteKeys">
