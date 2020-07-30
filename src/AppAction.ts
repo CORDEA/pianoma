@@ -1,8 +1,11 @@
+import {RandomNotes} from "./RandomNotes";
+
 export const START = 'START';
 export const END = 'END';
 
 interface StartAction {
-    type: typeof START
+    type: typeof START,
+    notes: RandomNotes
 }
 
 interface EndAction {
