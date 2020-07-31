@@ -4,11 +4,11 @@ import MusicalScore from "./MusicalScore";
 import Keyboard from "./Keyboard";
 import Button from "./Button";
 import {applyMiddleware, createStore} from "redux";
-import reducer from "./AppReducer";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
+import {rootReducer} from "./store";
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 function App() {
     return (

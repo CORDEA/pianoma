@@ -1,6 +1,5 @@
 import {AppState} from "./AppState";
 import {AppActionTypes} from "./AppAction";
-import {combineReducers} from "redux";
 
 const initialState: AppState = {notes: {trebles: [], basses: []}}
 
@@ -15,8 +14,4 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
     }
 }
 
-const reducer = combineReducers({
-    app: appReducer
-})
-
-export default reducer
+export default appReducer
