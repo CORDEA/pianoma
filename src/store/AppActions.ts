@@ -2,7 +2,7 @@ import {AppActionTypes, END, START} from "./AppAction";
 import {ThunkAction} from "redux-thunk";
 import {AppState} from "./AppState";
 import {Dispatch} from "redux";
-import {NotesGenerator} from "./NotesGenerator";
+import {NotesGenerator} from "../NotesGenerator";
 
 const generator = new NotesGenerator()
 

@@ -1,4 +1,4 @@
-import {RandomNotes} from "./RandomNotes";
+import {RandomNotes} from "../RandomNotes";
 
 export const START = 'START';
 export const END = 'END';

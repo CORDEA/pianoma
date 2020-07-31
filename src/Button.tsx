@@ -1,10 +1,10 @@
 import React from "react"
 import "./Button.css"
-import {next} from "./AppActions"
+import {next} from "./store/AppActions"
 import {connect, ConnectedProps} from "react-redux"
 import {ThunkDispatch} from "redux-thunk";
-import {AppState} from "./AppState";
-import {AppActionTypes} from "./AppAction";
+import {AppState} from "./store/AppState";
+import {AppActionTypes} from "./store/AppAction";
 
 const mapDispatch = (dispatch: ThunkDispatch<AppState, null, AppActionTypes>) => ({
     next: () => {
