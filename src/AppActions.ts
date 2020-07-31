@@ -10,7 +10,7 @@ export function next(): ThunkAction<void, AppState, null, AppActionTypes> {
     return async (dispatch: Dispatch<AppActionTypes>) => {
         dispatch({
             type: START,
-            notes: generator.generate(4)
+            notes: generator.generate(4, 4)
         })
         await new Promise(resolve =>
             setTimeout(() => resolve(), 20000)

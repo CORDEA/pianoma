@@ -1,4 +1,9 @@
 export interface RandomNotes {
-    treble: string[]
-    bass: string[]
+    trebles: Notes[]
+    basses: Notes[]
+}
+
+export interface Notes {
+    notes: string[]
+    stem: string
 }

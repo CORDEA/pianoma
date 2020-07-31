@@ -2,7 +2,7 @@ import {AppState} from "./AppState";
 import {AppActionTypes} from "./AppAction";
 import {combineReducers} from "redux";
 
-const initialState: AppState = {notes: {treble: [], bass: []}}
+const initialState: AppState = {notes: {trebles: [], basses: []}}
 
 function appReducer(state = initialState, action: AppActionTypes): AppState {
     switch (action.type) {
