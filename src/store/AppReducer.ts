@@ -1,6 +1,7 @@
 import {AppState} from "./AppState";
 import {AppActionTypes} from "./AppAction";
 import {NotesGenerator} from "../NotesGenerator";
+import {convertNote} from "../NoteConverter";
 
 const generator = new NotesGenerator(4, 4)
 
@@ -34,7 +35,7 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
                 .concat(state.notes.bass?.notes[state.currentProgress]?.concurrentNotes ?? [])
             return {
                 ...state,
-                // result: notes.map(n => n.replace("b", "#")),
+                result: notes.map(n => convertNote(n).format()),
                 inProgress: false
             }
         case "ANSWER":
