@@ -4,6 +4,11 @@ export interface RandomNotes {
 }
 
 export interface Notes {
-    notes: string[]
+    notes: Note[]
     stem: string
+}
+
+export interface Note {
+    note: string[]
+    suffix: string | null
 }

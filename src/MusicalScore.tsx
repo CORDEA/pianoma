@@ -3,6 +3,7 @@ import Vex from "vexflow";
 import "./MusicalScore.css";
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "./store";
+import {Note} from "./RandomNotes";
 
 const mapState = (state: RootState) => {
     return ({
@@ -41,7 +42,10 @@ class MusicalScore extends React.PureComponent<Props> {
         })
         system.addStave({
             voices: this.props.notes.trebles.map(t =>
-                score.voice(score.notes(t.notes.join(", "), {stem: t.stem}), {})
+                score.voice(
+                    score.notes(this.formatNotes(t.notes), {stem: t.stem}),
+                    {}
+                )
             )
         })
             .addClef("treble")
@@ -50,7 +54,10 @@ class MusicalScore extends React.PureComponent<Props> {
         if (basses.length > 0) {
             system.addStave({
                 voices: this.props.notes.basses.map(t =>
-                    score.voice(score.notes(t.notes.join(", "), {stem: t.stem, clef: "bass"}), {})
+                    score.voice(
+                        score.notes(this.formatNotes(t.notes), {stem: t.stem, clef: "bass"}),
+                        {}
+                    )
                 )
             })
                 .addClef("bass")
@@ -60,6 +67,21 @@ class MusicalScore extends React.PureComponent<Props> {
         system.addConnector("singleRight")
         system.addConnector("singleLeft")
         factory.draw()
+    }
+
+    private formatNotes(notes: Note[]): string {
+        return notes.map(n => {
+            let note: string
+            if (n.note.length === 1) {
+                note = n.note[0]
+            } else {
+                note = "(" + n.note.join(" ") + ")"
+            }
+            if (n.suffix === null) {
+                return note
+            }
+            return note + "/" + n.suffix
+        }).join(", ")
     }
 
     render() {

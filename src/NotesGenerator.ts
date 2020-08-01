@@ -1,4 +1,4 @@
-import {Notes, RandomNotes} from "./RandomNotes";
+import {Note, Notes, RandomNotes} from "./RandomNotes";
 
 export const NOTES = [
     "C",
@@ -24,18 +24,11 @@ export class NotesGenerator {
         const numberOfNotes = isHalf ? Math.floor(maxNotes / 2) : maxNotes
         const notes = Array.from(Array(numberOfNotes).keys()).map(i => {
                 const concurrency = Math.floor(Math.random() * maxConcurrency) + 1
-                let note = ""
-                if (concurrency === 1) {
-                    note = NotesGenerator.generateNote(isTreble)
-                } else {
-                    note = "(" + Array.from(Array(concurrency).keys())
-                        .map(_ => NotesGenerator.generateNote(isTreble))
-                        .join(" ") + ")"
+                return {
+                    note: Array.from(Array(concurrency).keys())
+                        .map(_ => NotesGenerator.generateNote(isTreble)),
+                    suffix: i === 0 ? suffix : null
                 }
-                if (i === 0) {
-                    return note + "/" + suffix
-                }
-                return note
             }
         )
         return {
