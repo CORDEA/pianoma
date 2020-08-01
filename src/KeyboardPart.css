@@ -8,14 +8,15 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
 }
 
 .KeyboardPart-whiteKeys {
     display: flex;
+    height: 100%;
 }
 
 .KeyboardPart-blackKeys {
     display: flex;
+    height: 190px;
     justify-content: space-evenly;
 }
