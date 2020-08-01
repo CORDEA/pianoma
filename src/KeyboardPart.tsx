@@ -14,16 +14,12 @@ interface Props {
 
 function KeyboardPart(props: Props) {
     const noteIndex = NOTES.indexOf(props.startNote)
-    const whiteKeys = Array.from(Array(props.numberOfBlackKeys + 1).keys()).map(i => {
-        const note = NOTES[noteIndex + i] + props.startLevel
-        // const color = props.highlight.includes(note) ? "#e0e0e0" : "#ffffff"
-        return <KeyboardWhiteKey note={note}/>
-    })
-    const blackKeys = Array.from(Array(props.numberOfBlackKeys).keys()).map(i => {
-        const note = NOTES[noteIndex + i] + "#" + props.startLevel
-        // const color = props.highlight.includes(note) ? "#616161" : "#000000"
-        return <KeyboardBlackKey note={note}/>
-    })
+    const whiteKeys = Array.from(Array(props.numberOfBlackKeys + 1).keys()).map(i =>
+        <KeyboardWhiteKey note={NOTES[noteIndex + i] + props.startLevel}/>
+    )
+    const blackKeys = Array.from(Array(props.numberOfBlackKeys).keys()).map(i =>
+        <KeyboardBlackKey note={NOTES[noteIndex + i] + "#" + props.startLevel}/>
+    )
     const width = WHITE_KEY_WIDTH * (props.numberOfBlackKeys + 1)
     return (
         <div className="KeyboardPart" style={{width: width}}>

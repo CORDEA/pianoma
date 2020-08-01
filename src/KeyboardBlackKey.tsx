@@ -30,6 +30,7 @@ function KeyboardBlackKey(props: Props) {
         <div
             className="KeyboardBlackKey"
             onClick={() => props.answer(props.note)}
+            style={{backgroundColor: props.answer.includes(props.note) ? "#616161" : "#000000"}}
             id={props.note}
             key={props.note}/>
     )

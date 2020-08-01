@@ -32,7 +32,10 @@ function KeyboardWhiteKey(props: Props) {
         <div
             className="KeyboardWhiteKey"
             id={props.note}
-            style={{width: WHITE_KEY_WIDTH}}
+            style={{
+                width: WHITE_KEY_WIDTH,
+                backgroundColor: props.answer.includes(props.note) ? "#e0e0e0" : "#ffffff"
+            }}
             onClick={() => props.answer(props.note)}
             key={props.note}/>
     )
