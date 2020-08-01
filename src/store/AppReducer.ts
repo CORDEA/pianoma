@@ -34,9 +34,10 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
             let answer = state.answer
             const index = answer.indexOf(action.note)
             if (index >= 0) {
-                answer = answer.splice(index, 1)
+                answer.splice(index, 1)
+                answer = Array.from(answer)
             } else {
-                answer.push(action.note)
+                answer = answer.concat(action.note)
             }
             return {...state, answer: answer}
         default:
