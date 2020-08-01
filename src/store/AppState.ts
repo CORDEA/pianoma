@@ -1,6 +1,6 @@
-import {RandomNotes} from "../RandomNotes";
+import {Question} from "../Question";
 
 export interface AppState {
-    notes: RandomNotes
+    notes: Question
     answer: string[]
 }

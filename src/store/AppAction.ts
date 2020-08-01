@@ -1,11 +1,11 @@
-import {RandomNotes} from "../RandomNotes";
+import {Question} from "../Question";
 
 export const START = 'START';
 export const END = 'END';
 
 interface StartAction {
     type: typeof START,
-    notes: RandomNotes
+    notes: Question
 }
 
 interface EndAction {

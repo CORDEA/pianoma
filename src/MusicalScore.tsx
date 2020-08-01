@@ -3,7 +3,7 @@ import Vex from "vexflow";
 import "./MusicalScore.css";
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "./store";
-import {Note} from "./RandomNotes";
+import {QuestionNote} from "./Question";
 
 const mapState = (state: RootState) => {
     return ({
@@ -69,7 +69,7 @@ class MusicalScore extends React.PureComponent<Props> {
         factory.draw()
     }
 
-    private formatNotes(notes: Note[]): string {
+    private formatNotes(notes: QuestionNote[]): string {
         return notes.map(n => {
             let note: string
             if (n.note.length === 1) {

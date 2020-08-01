@@ -1,4 +1,4 @@
-import {Note, Notes, RandomNotes} from "./RandomNotes";
+import {QuestionNote, QuestionNotes, Question} from "./Question";
 
 export const NOTES = [
     "C",
@@ -11,14 +11,14 @@ export const NOTES = [
 ]
 
 export class NotesGenerator {
-    generate(maxNotes: number, maxConcurrency: number): RandomNotes {
+    generate(maxNotes: number, maxConcurrency: number): Question {
         return {
             trebles: [this.generateNotes(maxNotes, Math.ceil(maxConcurrency / 2), true)],
             basses: [this.generateNotes(maxNotes, Math.floor(maxConcurrency / 2), false)]
         }
     }
 
-    private generateNotes(maxNotes: number, maxConcurrency: number, isTreble: boolean): Notes {
+    private generateNotes(maxNotes: number, maxConcurrency: number, isTreble: boolean): QuestionNotes {
         const isHalf = Math.random() >= 0.7
         const suffix = isHalf ? "h" : "q"
         const numberOfNotes = isHalf ? Math.floor(maxNotes / 2) : maxNotes
