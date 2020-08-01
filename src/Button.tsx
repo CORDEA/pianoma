@@ -1,6 +1,6 @@
 import React from "react"
 import "./Button.css"
-import {next} from "./store/AppActions"
+import {next} from "./store/NextAction"
 import {connect, ConnectedProps} from "react-redux"
 import {ThunkDispatch} from "redux-thunk";
 import {AppState} from "./store/AppState";
