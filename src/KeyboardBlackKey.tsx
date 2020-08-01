@@ -1,7 +1,27 @@
 import React from "react"
 import "./KeyboardWhiteKey.css"
+import {RootState} from "./store";
+import {connect, ConnectedProps} from "react-redux";
+import {ThunkDispatch} from "redux-thunk";
+import {AppState} from "./store/AppState";
+import {AppActionTypes} from "./store/AppAction";
+import {answer} from "./store/ClickKeyAction";
 
-interface Props {
+const mapState = (state: RootState) => {
+    return ({
+        answer: state.app.answer
+    })
+}
+const mapDispatch = (dispatch: ThunkDispatch<AppState, null, AppActionTypes>) => ({
+    answer: (note: string) => {
+        dispatch(answer(note))
+    }
+})
+
+const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux & {
     note: string
 }
 
@@ -9,9 +29,10 @@ function KeyboardBlackKey(props: Props) {
     return (
         <div
             className="KeyboardBlackKey"
+            onClick={() => props.answer(props.note)}
             id={props.note}
             key={props.note}/>
     )
 }
 
-export default KeyboardBlackKey
+export default connector(KeyboardBlackKey)
