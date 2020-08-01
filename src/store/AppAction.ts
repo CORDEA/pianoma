@@ -1,7 +1,8 @@
-import {Question} from "../Question";
+import {Question} from "../Question"
 
-export const START = 'START';
-export const END = 'END';
+export const START = 'START'
+export const END = 'END'
+export const ANSWER = 'ANSWER'
 
 interface StartAction {
     type: typeof START,
@@ -12,4 +13,9 @@ interface EndAction {
     type: typeof END
 }
 
-export type AppActionTypes = StartAction | EndAction
+interface AnswerAction {
+    type: typeof ANSWER,
+    note: string
+}
+
+export type AppActionTypes = StartAction | EndAction | AnswerAction
