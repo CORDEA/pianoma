@@ -8,8 +8,7 @@ import KeyboardBlackKey from "./KeyboardBlackKey";
 interface Props {
     startNote: string
     startLevel: number
-    numberOfBlackKeys: number,
-    highlight: string[]
+    numberOfBlackKeys: number
 }
 
 function KeyboardPart(props: Props) {
