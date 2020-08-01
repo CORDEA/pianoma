@@ -31,8 +31,21 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
                 inProgress: true
             }
         case "END":
-            const notes = state.notes.treble.notes[state.currentProgress].concurrentNotes
-                .concat(state.notes.bass?.notes[state.currentProgress]?.concurrentNotes ?? [])
+            const treble = state.notes.treble.notes
+            const bass = state.notes.bass?.notes ?? []
+            const isEven = state.currentProgress % 2 === 0
+            let trebleIndex = state.currentProgress
+            let bassIndex = state.currentProgress
+            if (treble.length > bass.length) {
+                bassIndex = isEven ? trebleIndex / 2 : -1
+            }
+            if (treble.length < bass.length) {
+                trebleIndex = isEven ? bassIndex / 2 : -1
+            }
+            let notes = trebleIndex >= 0 ? treble[trebleIndex].concurrentNotes : []
+            if (bass.length > 0 && bassIndex >= 0) {
+                notes = notes.concat(bass[bassIndex].concurrentNotes)
+            }
             return {
                 ...state,
                 result: notes.map(n => convertNote(n).format()),
