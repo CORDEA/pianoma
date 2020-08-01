@@ -1,4 +1,4 @@
-import {AppActionTypes, END, START} from "./AppAction";
+import {AppActionTypes, START} from "./AppAction";
 import {ThunkAction} from "redux-thunk";
 import {AppState} from "./AppState";
 import {Dispatch} from "redux";
@@ -11,12 +11,6 @@ export function next(): ThunkAction<void, AppState, null, AppActionTypes> {
         dispatch({
             type: START,
             notes: generator.generate(4, 4)
-        })
-        await new Promise(resolve =>
-            setTimeout(() => resolve(), 20000)
-        )
-        dispatch({
-            type: END
         })
     }
 }

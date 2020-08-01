@@ -1,14 +1,14 @@
 import {AppState} from "./AppState";
 import {AppActionTypes} from "./AppAction";
 
-const initialState: AppState = {notes: {trebles: [], basses: []}, answer: []}
+const initialState: AppState = {notes: {trebles: [], basses: []}, answer: [], inProgress: false}
 
 function appReducer(state = initialState, action: AppActionTypes): AppState {
     switch (action.type) {
         case "START":
-            return {...state, notes: action.notes}
+            return {...state, notes: action.notes, answer: [], inProgress: true}
         case "END":
-            return {...state}
+            return {...state, inProgress: false}
         case "ANSWER":
             let answer = state.answer
             const index = answer.indexOf(action.note)
