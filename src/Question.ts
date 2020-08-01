@@ -13,5 +13,5 @@ export interface QuestionNotes {
 
 export interface QuestionNote {
     concurrentNotes: Note[]
-    suffix: string | null
+    tempo: string
 }

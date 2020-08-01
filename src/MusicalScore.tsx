@@ -78,10 +78,10 @@ class MusicalScore extends React.PureComponent<Props> {
             } else {
                 note = "(" + n.concurrentNotes.map(n => n.format()).join(" ") + ")"
             }
-            if (n.suffix === null) {
+            if (n.tempo === null) {
                 return note
             }
-            return note + "/" + n.suffix
+            return note + "/" + n.tempo
         }).join(", ")
     }
 

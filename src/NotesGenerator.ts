@@ -33,14 +33,14 @@ export class NotesGenerator {
 
     private generateNotes(maxConcurrency: number, isTreble: boolean): QuestionNotes {
         const isHalf = Math.random() >= 0.7
-        const suffix = isHalf ? "h" : "q"
+        const tempo = isHalf ? "h" : "q"
         const numberOfNotes = isHalf ? Math.floor(this.maxNotes / 2) : this.maxNotes
         const notes = Array.from(Array(numberOfNotes).keys()).map(i => {
                 const concurrency = Math.floor(Math.random() * maxConcurrency) + 1
                 return {
                     concurrentNotes: Array.from(Array(concurrency).keys())
                         .map(_ => NotesGenerator.generateNote(isTreble)),
-                    suffix: i === 0 ? suffix : null
+                    tempo: tempo
                 }
             }
         )
