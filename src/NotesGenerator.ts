@@ -21,11 +21,12 @@ export class NotesGenerator {
 
     generate(): Question {
         const treble = this.generateNotes(Math.ceil(this.maxConcurrency / 2), true)
-        const bass = this.generateNotes(Math.floor(this.maxConcurrency / 2), false)
+        const bassConcurrency = Math.floor(this.maxConcurrency / 2)
+        const bass = bassConcurrency === 0 ? null : this.generateNotes(bassConcurrency, false)
         return {
-            maxNotes: Math.max(treble.notes.length, bass.notes.length),
-            trebles: [treble],
-            basses: [bass]
+            maxNotes: Math.max(treble.notes.length, bass?.notes?.length ?? 0),
+            treble: treble,
+            bass: bass
         }
     }
 

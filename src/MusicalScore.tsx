@@ -40,25 +40,26 @@ class MusicalScore extends React.PureComponent<Props> {
             y: 50,
             spaceBetweenStaves: 10
         })
+        const treble = this.props.notes.treble
+        const bass = this.props.notes.bass
         system.addStave({
-            voices: this.props.notes.trebles.map(t =>
+            voices: [
                 score.voice(
-                    score.notes(this.formatNotes(t.notes), {stem: t.stem}),
+                    score.notes(this.formatNotes(treble.notes), {stem: treble.stem}),
                     {}
                 )
-            )
+            ]
         })
             .addClef("treble")
             .addTimeSignature("4/4")
-        const basses = this.props.notes.basses
-        if (basses.length > 0) {
+        if (bass !== null) {
             system.addStave({
-                voices: this.props.notes.basses.map(t =>
+                voices: [
                     score.voice(
-                        score.notes(this.formatNotes(t.notes), {stem: t.stem, clef: "bass"}),
+                        score.notes(this.formatNotes(bass.notes), {stem: bass.stem, clef: "bass"}),
                         {}
                     )
-                )
+                ]
             })
                 .addClef("bass")
                 .addTimeSignature("4/4")

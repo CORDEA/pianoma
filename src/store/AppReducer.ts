@@ -5,7 +5,7 @@ import {NotesGenerator} from "../NotesGenerator";
 const generator = new NotesGenerator(4, 4)
 
 const initialState: AppState = {
-    notes: {maxNotes: 0, trebles: [], basses: []},
+    notes: {maxNotes: 0, treble: {notes: [], stem: ""}, bass: {notes: [], stem: ""}},
     answer: [],
     result: [],
     currentProgress: 0,
@@ -25,11 +25,18 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
                 ...state,
                 notes: question,
                 answer: [],
+                result: [],
                 currentProgress: progress,
                 inProgress: true
             }
         case "END":
-            return {...state, inProgress: false}
+            const notes = state.notes.treble.notes[state.currentProgress].note
+                .concat(state.notes.bass?.notes[state.currentProgress]?.note ?? [])
+            return {
+                ...state,
+                result: notes.map(n => n.replace("b", "#")),
+                inProgress: false
+            }
         case "ANSWER":
             let answer = state.answer
             const index = answer.indexOf(action.note)

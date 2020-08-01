@@ -1,7 +1,7 @@
 export interface Question {
     maxNotes: number
-    trebles: QuestionNotes[]
-    basses: QuestionNotes[]
+    treble: QuestionNotes
+    bass: QuestionNotes | null
 }
 
 export interface QuestionNotes {
