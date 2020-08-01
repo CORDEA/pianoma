@@ -8,7 +8,7 @@ const initialState: AppState = {
     notes: {maxNotes: 0, treble: {notes: [], stem: ""}, bass: {notes: [], stem: ""}},
     answer: [],
     result: [],
-    currentProgress: 0,
+    currentProgress: -1,
     inProgress: false
 }
 
@@ -17,9 +17,9 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
         case "START":
             let question = state.notes
             let progress = state.currentProgress + 1
-            if (question.maxNotes === 0 || progress >= question.maxNotes) {
+            if (question.maxNotes === 0 || (progress + 1) >= question.maxNotes) {
                 question = generator.generate()
-                progress = 1
+                progress = 0
             }
             return {
                 ...state,
