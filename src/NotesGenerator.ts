@@ -1,4 +1,4 @@
-import {QuestionNote, QuestionNotes, Question} from "./Question";
+import {Question, QuestionNotes} from "./Question";
 
 export const NOTES = [
     "C",
@@ -11,17 +11,28 @@ export const NOTES = [
 ]
 
 export class NotesGenerator {
-    generate(maxNotes: number, maxConcurrency: number): Question {
+    private readonly maxNotes: number
+    private readonly maxConcurrency: number
+
+    constructor(maxNotes: number, maxConcurrency: number) {
+        this.maxNotes = maxNotes
+        this.maxConcurrency = maxConcurrency
+    }
+
+    generate(): Question {
+        const treble = this.generateNotes(Math.ceil(this.maxConcurrency / 2), true)
+        const bass = this.generateNotes(Math.floor(this.maxConcurrency / 2), false)
         return {
-            trebles: [this.generateNotes(maxNotes, Math.ceil(maxConcurrency / 2), true)],
-            basses: [this.generateNotes(maxNotes, Math.floor(maxConcurrency / 2), false)]
+            maxNotes: Math.max(treble.notes.length, bass.notes.length),
+            trebles: [treble],
+            basses: [bass]
         }
     }
 
-    private generateNotes(maxNotes: number, maxConcurrency: number, isTreble: boolean): QuestionNotes {
+    private generateNotes(maxConcurrency: number, isTreble: boolean): QuestionNotes {
         const isHalf = Math.random() >= 0.7
         const suffix = isHalf ? "h" : "q"
-        const numberOfNotes = isHalf ? Math.floor(maxNotes / 2) : maxNotes
+        const numberOfNotes = isHalf ? Math.floor(this.maxNotes / 2) : this.maxNotes
         const notes = Array.from(Array(numberOfNotes).keys()).map(i => {
                 const concurrency = Math.floor(Math.random() * maxConcurrency) + 1
                 return {

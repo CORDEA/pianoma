@@ -1,12 +1,9 @@
-import {Question} from "../Question"
-
 export const START = 'START'
 export const END = 'END'
 export const ANSWER = 'ANSWER'
 
 interface StartAction {
-    type: typeof START,
-    notes: Question
+    type: typeof START
 }
 
 interface EndAction {

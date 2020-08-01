@@ -1,12 +1,33 @@
 import {AppState} from "./AppState";
 import {AppActionTypes} from "./AppAction";
+import {NotesGenerator} from "../NotesGenerator";
 
-const initialState: AppState = {notes: {trebles: [], basses: []}, answer: [], inProgress: false}
+const generator = new NotesGenerator(4, 4)
+
+const initialState: AppState = {
+    notes: {maxNotes: 0, trebles: [], basses: []},
+    answer: [],
+    result: [],
+    currentProgress: 0,
+    inProgress: false
+}
 
 function appReducer(state = initialState, action: AppActionTypes): AppState {
     switch (action.type) {
         case "START":
-            return {...state, notes: action.notes, answer: [], inProgress: true}
+            let question = state.notes
+            let progress = state.currentProgress + 1
+            if (question.maxNotes === 0 || progress >= question.maxNotes) {
+                question = generator.generate()
+                progress = 1
+            }
+            return {
+                ...state,
+                notes: question,
+                answer: [],
+                currentProgress: progress,
+                inProgress: true
+            }
         case "END":
             return {...state, inProgress: false}
         case "ANSWER":

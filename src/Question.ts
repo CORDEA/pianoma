@@ -1,4 +1,5 @@
 export interface Question {
+    maxNotes: number
     trebles: QuestionNotes[]
     basses: QuestionNotes[]
 }
