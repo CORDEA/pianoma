@@ -17,7 +17,7 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
         case "START":
             let question = state.notes
             let progress = state.currentProgress + 1
-            if (question.maxNotes === 0 || (progress + 1) >= question.maxNotes) {
+            if (question.maxNotes === 0 || progress >= question.maxNotes) {
                 question = generator.generate()
                 progress = 0
             }
