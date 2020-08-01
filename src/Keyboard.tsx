@@ -5,9 +5,21 @@ import KeyboardPart from "./KeyboardPart";
 function Keyboard() {
     const keys = Array.from(Array(14).keys()).map(i => {
         if (i % 2 === 0) {
-            return <KeyboardPart numberOfBlackKeys={2} startNote={"C"} startLevel={(i + 2) / 2}/>
+            const note = "C"
+            const level = (i + 2) / 2
+            return <KeyboardPart
+                numberOfBlackKeys={2}
+                startNote={note}
+                startLevel={level}
+                key={note + level}/>
         } else {
-            return <KeyboardPart numberOfBlackKeys={3} startNote={"F"} startLevel={(i + 1) / 2}/>
+            const note = "F"
+            const level = (i + 1) / 2
+            return <KeyboardPart
+                numberOfBlackKeys={3}
+                startNote={note}
+                startLevel={level}
+                key={note + level}/>
         }
     })
     return (

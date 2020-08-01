@@ -49,8 +49,7 @@ function KeyboardWhiteKey(props: Props) {
                 width: WHITE_KEY_WIDTH,
                 backgroundColor: color
             }}
-            onClick={() => props.click(props.note)}
-            key={props.note}/>
+            onClick={() => props.click(props.note)}/>
     )
 }
 
