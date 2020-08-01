@@ -11,11 +11,12 @@ export const WHITE_KEY_WIDTH = 46
 
 const mapState = (state: RootState) => {
     return ({
-        answer: state.app.answer
+        answer: state.app.answer,
+        result: state.app.result
     })
 }
 const mapDispatch = (dispatch: ThunkDispatch<AppState, null, AppActionTypes>) => ({
-    answer: (note: string) => {
+    click: (note: string) => {
         dispatch(answer(note))
     }
 })
@@ -28,15 +29,27 @@ type Props = PropsFromRedux & {
 }
 
 function KeyboardWhiteKey(props: Props) {
+    let color = "#ffffff"
+    const answer = props.answer.includes(props.note)
+    const correct = props.result.includes(props.note)
+    if (answer) {
+        color = "#e0f7fa"
+    }
+    if (correct) {
+        color = "#fce4ec"
+    }
+    if (answer && correct) {
+        color = "#d1c4e9"
+    }
     return (
         <div
             className="KeyboardWhiteKey"
             id={props.note}
             style={{
                 width: WHITE_KEY_WIDTH,
-                backgroundColor: props.answer.includes(props.note) ? "#e0e0e0" : "#ffffff"
+                backgroundColor: color
             }}
-            onClick={() => props.answer(props.note)}
+            onClick={() => props.click(props.note)}
             key={props.note}/>
     )
 }
