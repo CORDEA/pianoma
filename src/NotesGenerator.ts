@@ -1,4 +1,5 @@
 import {Question, QuestionNotes} from "./Question";
+import {Note} from "./Note";
 
 export const NOTES = [
     "C",
@@ -37,7 +38,7 @@ export class NotesGenerator {
         const notes = Array.from(Array(numberOfNotes).keys()).map(i => {
                 const concurrency = Math.floor(Math.random() * maxConcurrency) + 1
                 return {
-                    note: Array.from(Array(concurrency).keys())
+                    concurrentNotes: Array.from(Array(concurrency).keys())
                         .map(_ => NotesGenerator.generateNote(isTreble)),
                     suffix: i === 0 ? suffix : null
                 }
@@ -49,21 +50,18 @@ export class NotesGenerator {
         }
     }
 
-    private static generateNote(isTreble: boolean): string {
-        let mark
+    private static generateNote(isTreble: boolean): Note {
+        let pitch = ""
         switch (Math.floor(Math.random() * 3)) {
             case 0:
-                mark = ""
+                pitch = "#"
                 break
             case 1:
-                mark = "#"
-                break
-            case 2:
-                mark = "b"
+                pitch = "b"
                 break
         }
         const name = NOTES[Math.floor(Math.random() * NOTES.length)]
         const level = Math.floor(Math.random() * 2) + (isTreble ? 4 : 2)
-        return name + mark + level
+        return new Note(name, pitch, level)
     }
 }

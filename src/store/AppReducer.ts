@@ -30,11 +30,11 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
                 inProgress: true
             }
         case "END":
-            const notes = state.notes.treble.notes[state.currentProgress].note
-                .concat(state.notes.bass?.notes[state.currentProgress]?.note ?? [])
+            const notes = state.notes.treble.notes[state.currentProgress].concurrentNotes
+                .concat(state.notes.bass?.notes[state.currentProgress]?.concurrentNotes ?? [])
             return {
                 ...state,
-                result: notes.map(n => n.replace("b", "#")),
+                // result: notes.map(n => n.replace("b", "#")),
                 inProgress: false
             }
         case "ANSWER":

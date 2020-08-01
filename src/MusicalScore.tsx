@@ -73,10 +73,10 @@ class MusicalScore extends React.PureComponent<Props> {
     private formatNotes(notes: QuestionNote[]): string {
         return notes.map(n => {
             let note: string
-            if (n.note.length === 1) {
-                note = n.note[0]
+            if (n.concurrentNotes.length === 1) {
+                note = n.concurrentNotes[0].format()
             } else {
-                note = "(" + n.note.join(" ") + ")"
+                note = "(" + n.concurrentNotes.map(n => n.format()).join(" ") + ")"
             }
             if (n.suffix === null) {
                 return note

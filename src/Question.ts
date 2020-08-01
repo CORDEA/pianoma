@@ -1,3 +1,5 @@
+import {Note} from "./Note";
+
 export interface Question {
     maxNotes: number
     treble: QuestionNotes
@@ -10,6 +12,6 @@ export interface QuestionNotes {
 }
 
 export interface QuestionNote {
-    note: string[]
+    concurrentNotes: Note[]
     suffix: string | null
 }
