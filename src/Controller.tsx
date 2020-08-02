@@ -11,10 +11,12 @@ import {AppActionTypes} from "./store/AppAction";
 import "@material/react-button/dist/button.min.css"
 import "@material/react-switch/dist/switch.min.css"
 import "./Controller.css"
+import {auto} from "./store/AutoAction";
 
 const mapState = (state: RootState) => {
     return ({
-        inProgress: state.app.inProgress
+        inProgress: state.app.inProgress,
+        isAuto: state.app.isAuto
     })
 }
 const mapDispatch = (dispatch: ThunkDispatch<AppState, null, AppActionTypes>) => ({
@@ -23,6 +25,9 @@ const mapDispatch = (dispatch: ThunkDispatch<AppState, null, AppActionTypes>) =>
     },
     finish: () => {
         dispatch(finish())
+    },
+    switchAuto: (isAuto: boolean) => {
+        dispatch(auto(isAuto))
     }
 })
 const connector = connect(mapState, mapDispatch)
@@ -35,6 +40,10 @@ function Controller(props: Props) {
         <div className="Controller">
             <MaterialSwitch
                 nativeControlId="autoSwitch"
+                checked={props.isAuto}
+                onChange={(e) =>
+                    props.switchAuto((e.target as HTMLInputElement).checked)
+                }
             />
             <label className="Controller-autoSwitchLabel" htmlFor="autoSwitch">Auto</label>
             <MaterialButton
