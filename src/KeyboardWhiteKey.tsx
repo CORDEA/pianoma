@@ -26,6 +26,7 @@ const connector = connect(mapState, mapDispatch)
 type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux & {
     note: string
+    strokeColor: string
 }
 
 function KeyboardWhiteKey(props: Props) {
@@ -47,7 +48,8 @@ function KeyboardWhiteKey(props: Props) {
             id={props.note}
             style={{
                 width: WHITE_KEY_WIDTH,
-                backgroundColor: color
+                backgroundColor: color,
+                borderColor: props.strokeColor
             }}
             onClick={() => props.click(props.note)}/>
     )

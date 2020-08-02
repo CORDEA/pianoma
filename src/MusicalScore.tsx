@@ -4,6 +4,7 @@ import "./MusicalScore.css";
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "./store";
 import {QuestionNote} from "./Question";
+import {KEY_COLORS} from "./Constants";
 
 const mapState = (state: RootState) => {
     return ({
@@ -17,6 +18,11 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux
 
 class MusicalScore extends React.PureComponent<Props> {
+    private static readonly X = 50
+    private static readonly Y = 50
+    private static readonly WIDTH = 500
+    private static readonly LINE_HEIGHT = 20
+
     private div = React.createRef<HTMLDivElement>()
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
@@ -36,8 +42,9 @@ class MusicalScore extends React.PureComponent<Props> {
         })
         const score = factory.EasyScore()
         const system = factory.System({
-            x: 50,
-            y: 50,
+            x: MusicalScore.X,
+            y: MusicalScore.Y,
+            width: MusicalScore.WIDTH,
             spaceBetweenStaves: 10
         })
         const treble = this.props.notes.treble
@@ -86,9 +93,39 @@ class MusicalScore extends React.PureComponent<Props> {
     }
 
     render() {
+        let treblePaths: JSX.Element[] = []
+        let bassPaths: JSX.Element[] = []
+        const notes = this.props.notes
+        if (notes.treble.notes.length > 0) {
+            treblePaths = Array.from(Array(4).keys()).map(i =>
+                MusicalScore.createPath(20 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i])
+            )
+        }
+        if (notes.bass && notes.bass.notes.length > 0) {
+            bassPaths = Array.from(Array(4).keys()).map(i =>
+                MusicalScore.createPath(130 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i + 4])
+            )
+        }
         return (
-            <div id="MusicalScore" ref={this.div}/>
+            <div className="MusicalScore">
+                <svg>
+                    {treblePaths}
+                    {bassPaths}
+                </svg>
+                <div id="MusicalScore" ref={this.div}/>
+            </div>
         );
+    }
+
+    private static createPath(baseY: number, color: string) {
+        const x = MusicalScore.X
+        const y = MusicalScore.Y + baseY
+        const height = y + MusicalScore.LINE_HEIGHT
+        const width = MusicalScore.X + MusicalScore.WIDTH
+        return <path
+            fill={color}
+            d={`M${x} ${y}L${width} ${y}L${width} ${height}L${x} ${height}Z`}
+        />
     }
 }
 
