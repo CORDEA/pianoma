@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {rootReducer} from "./store";
 import Controller from "./Controller";
+import Status from "./Status";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
@@ -16,6 +17,7 @@ function App() {
             <div className="App">
                 <MusicalScore/>
                 <Keyboard/>
+                <Status/>
                 <Controller/>
             </div>
         </Provider>

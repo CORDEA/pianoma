@@ -14,9 +14,7 @@ import "./Controller.css"
 
 const mapState = (state: RootState) => {
     return ({
-        inProgress: state.app.inProgress,
-        numberOfAnswers: state.app.numberOfAnswers,
-        numberOfCorrectAnswers: state.app.numberOfCorrectAnswers
+        inProgress: state.app.inProgress
     })
 }
 const mapDispatch = (dispatch: ThunkDispatch<AppState, null, AppActionTypes>) => ({
@@ -33,27 +31,18 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux
 
 function Controller(props: Props) {
-    let rate = 0
-    if (props.numberOfAnswers) {
-        rate = (props.numberOfCorrectAnswers / props.numberOfAnswers) * 100
-    }
     return (
         <div className="Controller">
-            <label className="Controller-stats">
-                {`${rate}% (${props.numberOfCorrectAnswers} / ${props.numberOfAnswers})`}
-            </label>
-            <div className="Controller">
-                <MaterialSwitch
-                    nativeControlId="autoSwitch"
-                />
-                <label className="Controller-autoSwitchLabel" htmlFor="autoSwitch">Auto</label>
-                <MaterialButton
-                    raised
-                    className="Controller-button"
-                    onClick={props.inProgress ? props.finish : props.next}>
-                    {props.inProgress ? "ANSWER" : "NEXT"}
-                </MaterialButton>
-            </div>
+            <MaterialSwitch
+                nativeControlId="autoSwitch"
+            />
+            <label className="Controller-autoSwitchLabel" htmlFor="autoSwitch">Auto</label>
+            <MaterialButton
+                raised
+                className="Controller-button"
+                onClick={props.inProgress ? props.finish : props.next}>
+                {props.inProgress ? "ANSWER" : "NEXT"}
+            </MaterialButton>
         </div>
     )
 }
