@@ -3,3 +3,17 @@
     margin: 32px 32px 0 auto;
     font-size: 18px;
 }
+
+.Controller {
+    display: table;
+    margin: 16px 32px 16px auto;
+}
+
+.Controller-autoSwitchLabel {
+    margin-left: 8px;
+}
+
+.Controller-button {
+    min-width: 100px;
+    margin-left: 16px;
+}
