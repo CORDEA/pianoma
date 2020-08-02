@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import MusicalScore from "./MusicalScore";
 import Keyboard from "./Keyboard";
-import Button from "./Button";
 import {applyMiddleware, createStore} from "redux";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {rootReducer} from "./store";
+import Controller from "./Controller";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
@@ -16,7 +16,7 @@ function App() {
             <div className="App">
                 <MusicalScore/>
                 <Keyboard/>
-                <Button/>
+                <Controller/>
             </div>
         </Provider>
     );

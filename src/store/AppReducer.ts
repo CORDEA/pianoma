@@ -9,8 +9,10 @@ const initialState: AppState = {
     notes: {maxNotes: 0, treble: {notes: [], stem: ""}, bass: {notes: [], stem: ""}},
     answer: [],
     result: [],
+    numberOfAnswers: 0,
+    numberOfCorrectAnswers: 0,
     currentProgress: -1,
-    inProgress: false
+    inProgress: false,
 }
 
 function appReducer(state = initialState, action: AppActionTypes): AppState {
@@ -46,10 +48,17 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
             if (bass.length > 0 && bassIndex >= 0) {
                 notes = notes.concat(bass[bassIndex].concurrentNotes)
             }
+            const result = notes.map(n => convertNote(n).format())
+            let correct = false
+            if (state.answer.length === result.length) {
+                correct = state.answer.every((value, i) => value === result[i])
+            }
             return {
                 ...state,
-                result: notes.map(n => convertNote(n).format()),
-                inProgress: false
+                result: result,
+                inProgress: false,
+                numberOfAnswers: state.numberOfAnswers + 1,
+                numberOfCorrectAnswers: state.numberOfCorrectAnswers + (correct ? 1 : 0)
             }
         case "ANSWER":
             let answer = state.answer
