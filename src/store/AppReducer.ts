@@ -13,6 +13,7 @@ const initialState: AppState = {
     numberOfCorrectAnswers: 0,
     currentProgress: -1,
     inProgress: false,
+    isAuto: false
 }
 
 function appReducer(state = initialState, action: AppActionTypes): AppState {
@@ -70,6 +71,8 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
                 answer = answer.concat(action.note)
             }
             return {...state, answer: answer}
+        case "AUTO":
+            return {...state, isAuto: action.isAuto}
         default:
             return state
     }

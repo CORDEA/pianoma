@@ -1,6 +1,7 @@
-export const START = 'START'
-export const END = 'END'
-export const ANSWER = 'ANSWER'
+export const START = "START"
+export const END = "END"
+export const ANSWER = "ANSWER"
+export const AUTO = "AUTO"
 
 interface StartAction {
     type: typeof START
@@ -15,4 +16,9 @@ interface AnswerAction {
     note: string
 }
 
-export type AppActionTypes = StartAction | EndAction | AnswerAction
+interface AutoAction {
+    type: typeof AUTO,
+    isAuto: boolean
+}
+
+export type AppActionTypes = StartAction | EndAction | AnswerAction | AutoAction
