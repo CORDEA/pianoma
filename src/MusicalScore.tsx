@@ -124,6 +124,7 @@ class MusicalScore extends React.PureComponent<Props> {
         const width = MusicalScore.X + MusicalScore.WIDTH
         return <path
             fill={color}
+            fillOpacity="0.3"
             d={`M${x} ${y}L${width} ${y}L${width} ${height}L${x} ${height}Z`}
         />
     }
