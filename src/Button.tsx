@@ -1,12 +1,14 @@
 import React from "react"
 import "./Button.css"
+import "@material/react-button/dist/button.min.css"
 import {next} from "./store/NextAction"
 import {connect, ConnectedProps} from "react-redux"
-import {ThunkDispatch} from "redux-thunk";
-import {AppState} from "./store/AppState";
-import {AppActionTypes} from "./store/AppAction";
-import {RootState} from "./store";
-import {finish} from "./store/FinishAction";
+import {ThunkDispatch} from "redux-thunk"
+import {AppState} from "./store/AppState"
+import {AppActionTypes} from "./store/AppAction"
+import {RootState} from "./store"
+import {finish} from "./store/FinishAction"
+import MaterialButton from "@material/react-button"
 
 const mapState = (state: RootState) => {
     return ({
@@ -28,8 +30,13 @@ type Props = PropsFromRedux
 
 function Button(props: Props) {
     return (
-        <div className="Button" onClick={props.inProgress ? props.finish : props.next}>
-            <p>{props.inProgress ? "ANSWER" : "NEXT"}</p>
+        <div className="Button">
+            <MaterialButton
+                raised
+                className="Button"
+                onClick={props.inProgress ? props.finish : props.next}>
+                {props.inProgress ? "ANSWER" : "NEXT"}
+            </MaterialButton>
         </div>
     )
 }
