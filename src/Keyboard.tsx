@@ -26,6 +26,7 @@ function Keyboard() {
         <div className="Keyboard">
             <KeyboardPart numberOfBlackKeys={1} startNote={"A"} startLevel={0}/>
             {keys}
+            <KeyboardPart numberOfBlackKeys={0} startNote={"C"} startLevel={8}/>
         </div>
     )
 }
