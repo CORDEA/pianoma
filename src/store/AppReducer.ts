@@ -20,20 +20,7 @@ const initialState: AppState = {
 function appReducer(state = initialState, action: AppActionTypes): AppState {
     switch (action.type) {
         case "START":
-            let question = state.notes
-            let progress = state.currentProgress + 1
-            if (question.maxNotes === 0 || progress >= question.maxNotes) {
-                question = generator.generate()
-                progress = 0
-            }
-            return {
-                ...state,
-                notes: question,
-                answer: [],
-                result: [],
-                currentProgress: progress,
-                inProgress: true
-            }
+            return start(state)
         case "END":
             return setResult(state, getCurrentNotes(state))
         case "ANSWER":
@@ -49,6 +36,9 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
             if (!state.isAuto) {
                 return newState
             }
+            if (!state.inProgress) {
+                return start(state)
+            }
             const notes = getCurrentNotes(state)
             if (notes.length === answer.length) {
                 return setResult(newState, notes)
@@ -58,6 +48,23 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
             return {...state, isAuto: action.isAuto}
         default:
             return state
+    }
+}
+
+function start(state: AppState): AppState {
+    let question = state.notes
+    let progress = state.currentProgress + 1
+    if (question.maxNotes === 0 || progress >= question.maxNotes) {
+        question = generator.generate()
+        progress = 0
+    }
+    return {
+        ...state,
+        notes: question,
+        answer: [],
+        result: [],
+        currentProgress: progress,
+        inProgress: true
     }
 }
 
