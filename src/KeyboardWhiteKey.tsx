@@ -6,8 +6,7 @@ import {AppState} from "./store/AppState";
 import {AppActionTypes} from "./store/AppAction";
 import {answer} from "./store/ClickKeyAction";
 import {connect, ConnectedProps} from "react-redux";
-
-export const WHITE_KEY_WIDTH = 46
+import {WHITE_KEY_WIDTH} from "./Constants";
 
 const mapState = (state: RootState) => {
     return ({

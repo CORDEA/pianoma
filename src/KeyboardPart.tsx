@@ -1,10 +1,8 @@
 import React from "react";
-
 import "./KeyboardPart.css"
-import {NOTES} from "./NotesGenerator";
-import KeyboardWhiteKey, {WHITE_KEY_WIDTH} from "./KeyboardWhiteKey";
-import KeyboardBlackKey from "./KeyboardBlackKey";
-import {KEY_COLORS} from "./Constants";
+import KeyboardBlackKey from "./KeyboardBlackKey"
+import {KEY_COLORS, NOTES, WHITE_KEY_WIDTH} from "./Constants"
+import KeyboardWhiteKey from "./KeyboardWhiteKey"
 
 interface Props {
     startNote: string

@@ -1,15 +1,6 @@
 import {Question, QuestionNotes} from "./Question";
 import {Note} from "./Note";
-
-export const NOTES = [
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "A",
-    "B"
-]
+import {NOTES} from "./Constants";
 
 export class NotesGenerator {
     private readonly maxNotes: number

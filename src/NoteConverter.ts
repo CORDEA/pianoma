@@ -1,5 +1,5 @@
-import {Note} from "./Note";
-import {NOTES} from "./NotesGenerator";
+import {Note} from "./Note"
+import {NOTES} from "./Constants"
 
 export function convertNote(note: Note): Note {
     let base = note.base
