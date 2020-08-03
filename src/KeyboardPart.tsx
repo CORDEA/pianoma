@@ -14,8 +14,7 @@ function KeyboardPart(props: Props) {
     const noteIndex = NOTES.indexOf(props.startNote)
     let strokeColor = "#bdbdbd"
     if (props.startLevel >= 2 && props.startLevel <= 5) {
-        const index = KEY_COLORS.length - 1 - (props.startLevel - 2) * 2
-        strokeColor = props.numberOfBlackKeys > 2 ? KEY_COLORS[index - 1] : KEY_COLORS[index]
+        strokeColor = KEY_COLORS[props.numberOfBlackKeys > 2 ? 1 : 0]
     }
     const whiteKeys = Array.from(Array(props.numberOfBlackKeys + 1).keys()).map(i => {
         const note = NOTES[noteIndex + i] + props.startLevel

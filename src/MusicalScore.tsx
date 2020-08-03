@@ -98,12 +98,12 @@ class MusicalScore extends React.PureComponent<Props> {
         const notes = this.props.notes
         if (notes.treble.notes.length > 0) {
             treblePaths = Array.from(Array(4).keys()).map(i =>
-                MusicalScore.createPath(20 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i])
+                MusicalScore.createPath(20 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
             )
         }
         if (notes.bass && notes.bass.notes.length > 0) {
             bassPaths = Array.from(Array(4).keys()).map(i =>
-                MusicalScore.createPath(130 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i + 4])
+                MusicalScore.createPath(130 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
             )
         }
         return (
