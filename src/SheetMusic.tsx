@@ -1,6 +1,6 @@
 import React from "react";
 import Vex from "vexflow";
-import "./MusicalScore.css";
+import "./SheetMusic.css";
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "./store";
 import {QuestionNote} from "./Question";
@@ -18,7 +18,7 @@ const connector = connect(mapState, mapDispatch)
 type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux
 
-class MusicalScore extends React.PureComponent<Props> {
+class SheetMusic extends React.PureComponent<Props> {
     private static readonly X = 50
     private static readonly Y = 50
     private static readonly WIDTH = 500
@@ -36,16 +36,16 @@ class MusicalScore extends React.PureComponent<Props> {
         }
         const factory = new Vex.Flow.Factory({
             renderer: {
-                elementId: "MusicalScore",
+                elementId: "SheetMusic",
                 width: 1000,
                 height: 400
             }
         })
         const score = factory.EasyScore()
         const system = factory.System({
-            x: MusicalScore.X,
-            y: MusicalScore.Y,
-            width: MusicalScore.WIDTH,
+            x: SheetMusic.X,
+            y: SheetMusic.Y,
+            width: SheetMusic.WIDTH,
             spaceBetweenStaves: 10
         })
         const treble = this.props.notes.treble
@@ -100,31 +100,31 @@ class MusicalScore extends React.PureComponent<Props> {
             const notes = this.props.notes
             if (notes.treble.notes.length > 0) {
                 treblePaths = Array.from(Array(4).keys()).map(i =>
-                    MusicalScore.createPath(20 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
+                    SheetMusic.createPath(20 + (SheetMusic.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
                 )
             }
             if (notes.bass && notes.bass.notes.length > 0) {
                 bassPaths = Array.from(Array(4).keys()).map(i =>
-                    MusicalScore.createPath(130 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
+                    SheetMusic.createPath(130 + (SheetMusic.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
                 )
             }
         }
         return (
-            <div className="MusicalScore">
+            <div className="SheetMusic">
                 <svg>
                     {treblePaths}
                     {bassPaths}
                 </svg>
-                <div id="MusicalScore" ref={this.div}/>
+                <div id="SheetMusic" ref={this.div}/>
             </div>
         );
     }
 
     private static createPath(baseY: number, color: string) {
-        const x = MusicalScore.X
-        const y = MusicalScore.Y + baseY
-        const height = y + MusicalScore.LINE_HEIGHT
-        const width = MusicalScore.X + MusicalScore.WIDTH
+        const x = SheetMusic.X
+        const y = SheetMusic.Y + baseY
+        const height = y + SheetMusic.LINE_HEIGHT
+        const width = SheetMusic.X + SheetMusic.WIDTH
         return <path
             fill={color}
             fillOpacity="0.3"
@@ -133,4 +133,4 @@ class MusicalScore extends React.PureComponent<Props> {
     }
 }
 
-export default connector(MusicalScore)
+export default connector(SheetMusic)

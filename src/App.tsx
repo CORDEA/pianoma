@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import MusicalScore from "./MusicalScore";
+import SheetMusic from "./SheetMusic";
 import Keyboard from "./Keyboard";
 import {applyMiddleware, createStore} from "redux";
 import {Provider} from "react-redux";
@@ -15,7 +15,7 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App">
-                <MusicalScore/>
+                <SheetMusic/>
                 <Keyboard/>
                 <Status/>
                 <Controller/>
