@@ -8,5 +8,6 @@ export interface AppState {
     numberOfCorrectAnswers: number
     currentProgress: number
     inProgress: boolean,
-    isAuto: boolean
+    isAuto: boolean,
+    enableGuide: boolean
 }

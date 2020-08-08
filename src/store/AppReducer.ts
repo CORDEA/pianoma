@@ -46,6 +46,8 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
             return newState
         case "AUTO":
             return {...state, isAuto: action.isAuto}
+        case "ENABLE_GUIDE":
+            return state
         default:
             return state
     }
