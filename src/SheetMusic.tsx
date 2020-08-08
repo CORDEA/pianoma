@@ -5,6 +5,13 @@ import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "./store";
 import {QuestionNote} from "./Question";
 import {KEY_COLORS} from "./Constants";
+import SheetMusicOverlay from "./SheetMusicOverlay";
+
+export const SHEET_X = 50
+export const SHEET_Y = 50
+export const SHEET_NOTES_OFFSET = 70
+export const SHEET_WIDTH = 500
+export const SHEET_LINE_HEIGHT = 20
 
 const mapState = (state: RootState) => {
     return ({
@@ -19,11 +26,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux
 
 class SheetMusic extends React.PureComponent<Props> {
-    private static readonly X = 50
-    private static readonly Y = 50
-    private static readonly WIDTH = 500
-    private static readonly LINE_HEIGHT = 20
-
     private div = React.createRef<HTMLDivElement>()
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
@@ -43,9 +45,9 @@ class SheetMusic extends React.PureComponent<Props> {
         })
         const score = factory.EasyScore()
         const system = factory.System({
-            x: SheetMusic.X,
-            y: SheetMusic.Y,
-            width: SheetMusic.WIDTH,
+            x: SHEET_X,
+            y: SHEET_Y,
+            width: SHEET_WIDTH,
             spaceBetweenStaves: 10
         })
         const treble = this.props.notes.treble
@@ -100,17 +102,18 @@ class SheetMusic extends React.PureComponent<Props> {
             const notes = this.props.notes
             if (notes.treble.notes.length > 0) {
                 treblePaths = Array.from(Array(4).keys()).map(i =>
-                    SheetMusic.createPath(20 + (SheetMusic.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
+                    SheetMusic.createPath(20 + (SHEET_LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
                 )
             }
             if (notes.bass && notes.bass.notes.length > 0) {
                 bassPaths = Array.from(Array(4).keys()).map(i =>
-                    SheetMusic.createPath(130 + (SheetMusic.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
+                    SheetMusic.createPath(130 + (SHEET_LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
                 )
             }
         }
         return (
             <div className="SheetMusic">
+                <SheetMusicOverlay/>
                 <svg>
                     {treblePaths}
                     {bassPaths}
@@ -121,10 +124,10 @@ class SheetMusic extends React.PureComponent<Props> {
     }
 
     private static createPath(baseY: number, color: string) {
-        const x = SheetMusic.X
-        const y = SheetMusic.Y + baseY
-        const height = y + SheetMusic.LINE_HEIGHT
-        const width = SheetMusic.X + SheetMusic.WIDTH
+        const x = SHEET_X
+        const y = SHEET_Y + baseY
+        const height = y + SHEET_LINE_HEIGHT
+        const width = SHEET_X + SHEET_WIDTH
         return <path
             fill={color}
             fillOpacity="0.3"
