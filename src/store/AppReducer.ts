@@ -14,7 +14,8 @@ const initialState: AppState = {
     numberOfCorrectAnswers: 0,
     currentProgress: -1,
     inProgress: false,
-    isAuto: false
+    isAuto: false,
+    enableGuide: false
 }
 
 function appReducer(state = initialState, action: AppActionTypes): AppState {
@@ -47,7 +48,7 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
         case "AUTO":
             return {...state, isAuto: action.isAuto}
         case "ENABLE_GUIDE":
-            return state
+            return {...state, enableGuide: action.enableGuide}
         default:
             return state
     }
