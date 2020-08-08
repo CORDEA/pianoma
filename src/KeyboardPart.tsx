@@ -3,8 +3,19 @@ import "./KeyboardPart.css"
 import KeyboardBlackKey from "./KeyboardBlackKey"
 import {KEY_COLORS, NOTES, WHITE_KEY_WIDTH} from "./Constants"
 import KeyboardWhiteKey from "./KeyboardWhiteKey"
+import {RootState} from "./store";
+import {connect, ConnectedProps} from "react-redux";
 
-interface Props {
+const mapState = (state: RootState) => {
+    return ({
+        enableGuide: state.app.enableGuide
+    })
+}
+
+const connector = connect(mapState)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux & {
     startNote: string
     startLevel: number
     numberOfBlackKeys: number
@@ -13,8 +24,10 @@ interface Props {
 function KeyboardPart(props: Props) {
     const noteIndex = NOTES.indexOf(props.startNote)
     let strokeColor = "#bdbdbd"
-    if (props.startLevel >= 2 && props.startLevel <= 5) {
-        strokeColor = KEY_COLORS[props.numberOfBlackKeys > 2 ? 1 : 0]
+    if (props.enableGuide) {
+        if (props.startLevel >= 2 && props.startLevel <= 5) {
+            strokeColor = KEY_COLORS[props.numberOfBlackKeys > 2 ? 1 : 0]
+        }
     }
     const whiteKeys = Array.from(Array(props.numberOfBlackKeys + 1).keys()).map(i => {
         const note = NOTES[noteIndex + i] + props.startLevel
@@ -37,4 +50,4 @@ function KeyboardPart(props: Props) {
     )
 }
 
-export default KeyboardPart
+export default connector(KeyboardPart)

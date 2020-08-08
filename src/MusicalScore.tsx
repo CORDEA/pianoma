@@ -8,7 +8,8 @@ import {KEY_COLORS} from "./Constants";
 
 const mapState = (state: RootState) => {
     return ({
-        notes: state.app.notes
+        notes: state.app.notes,
+        enableGuide: state.app.enableGuide
     })
 }
 const mapDispatch = {}
@@ -95,16 +96,18 @@ class MusicalScore extends React.PureComponent<Props> {
     render() {
         let treblePaths: JSX.Element[] = []
         let bassPaths: JSX.Element[] = []
-        const notes = this.props.notes
-        if (notes.treble.notes.length > 0) {
-            treblePaths = Array.from(Array(4).keys()).map(i =>
-                MusicalScore.createPath(20 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
-            )
-        }
-        if (notes.bass && notes.bass.notes.length > 0) {
-            bassPaths = Array.from(Array(4).keys()).map(i =>
-                MusicalScore.createPath(130 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
-            )
+        if (this.props.enableGuide) {
+            const notes = this.props.notes
+            if (notes.treble.notes.length > 0) {
+                treblePaths = Array.from(Array(4).keys()).map(i =>
+                    MusicalScore.createPath(20 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
+                )
+            }
+            if (notes.bass && notes.bass.notes.length > 0) {
+                bassPaths = Array.from(Array(4).keys()).map(i =>
+                    MusicalScore.createPath(130 + (MusicalScore.LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
+                )
+            }
         }
         return (
             <div className="MusicalScore">
