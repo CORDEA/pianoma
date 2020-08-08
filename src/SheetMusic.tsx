@@ -4,7 +4,6 @@ import "./SheetMusic.css";
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "./store";
 import {QuestionNote} from "./Question";
-import {KEY_COLORS} from "./Constants";
 import SheetMusicOverlay from "./SheetMusicOverlay";
 
 export const SHEET_X = 50
@@ -15,8 +14,7 @@ export const SHEET_LINE_HEIGHT = 20
 
 const mapState = (state: RootState) => {
     return ({
-        notes: state.app.notes,
-        enableGuide: state.app.enableGuide
+        notes: state.app.notes
     })
 }
 const mapDispatch = {}
@@ -96,44 +94,14 @@ class SheetMusic extends React.PureComponent<Props> {
     }
 
     render() {
-        let treblePaths: JSX.Element[] = []
-        let bassPaths: JSX.Element[] = []
-        if (this.props.enableGuide) {
-            const notes = this.props.notes
-            if (notes.treble.notes.length > 0) {
-                treblePaths = Array.from(Array(4).keys()).map(i =>
-                    SheetMusic.createPath(20 + (SHEET_LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
-                )
-            }
-            if (notes.bass && notes.bass.notes.length > 0) {
-                bassPaths = Array.from(Array(4).keys()).map(i =>
-                    SheetMusic.createPath(130 + (SHEET_LINE_HEIGHT * i), KEY_COLORS[i % 2 === 0 ? 1 : 0])
-                )
-            }
-        }
         return (
             <div className="SheetMusic">
                 <SheetMusicOverlay/>
-                <svg>
-                    {treblePaths}
-                    {bassPaths}
-                </svg>
                 <div id="SheetMusic" ref={this.div}/>
             </div>
         );
     }
 
-    private static createPath(baseY: number, color: string) {
-        const x = SHEET_X
-        const y = SHEET_Y + baseY
-        const height = y + SHEET_LINE_HEIGHT
-        const width = SHEET_X + SHEET_WIDTH
-        return <path
-            fill={color}
-            fillOpacity="0.3"
-            d={`M${x} ${y}L${width} ${y}L${width} ${height}L${x} ${height}Z`}
-        />
-    }
 }
 
 export default connector(SheetMusic)
