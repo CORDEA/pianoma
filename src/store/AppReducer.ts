@@ -75,7 +75,7 @@ function setResult(state: AppState, currentNotes: Note[]): AppState {
     const result = currentNotes.map(n => convertNote(n).format())
     let correct = false
     if (state.answer.length === result.length) {
-        correct = state.answer.every((value, i) => value === result[i])
+        correct = state.answer.every((value, _) => result.includes(value))
     }
     return {
         ...state,
