@@ -20,11 +20,13 @@ const initialState: AppState = {
 
 function appReducer(state = initialState, action: AppActionTypes): AppState {
     switch (action.type) {
-        case "START":
+        case "START": {
             return start(state)
-        case "END":
+        }
+        case "END": {
             return setResult(state, getCurrentNotes(state))
-        case "ANSWER":
+        }
+        case "ANSWER": {
             let answer = state.answer
             const index = answer.indexOf(action.note)
             if (index >= 0) {
@@ -45,12 +47,16 @@ function appReducer(state = initialState, action: AppActionTypes): AppState {
                 return setResult(newState, notes)
             }
             return newState
-        case "AUTO":
+        }
+        case "AUTO": {
             return {...state, isAuto: action.isAuto}
-        case "ENABLE_GUIDE":
+        }
+        case "ENABLE_GUIDE": {
             return {...state, enableGuide: action.enableGuide}
-        default:
+        }
+        default: {
             return state
+        }
     }
 }
 
@@ -75,7 +81,7 @@ function setResult(state: AppState, currentNotes: Note[]): AppState {
     const result = currentNotes.map(n => convertNote(n).format())
     let correct = false
     if (state.answer.length === result.length) {
-        correct = state.answer.every((value, _) => result.includes(value))
+        correct = state.answer.every((value) => result.includes(value))
     }
     return {
         ...state,

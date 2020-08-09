@@ -26,11 +26,7 @@ type Props = PropsFromRedux;
 class SheetMusic extends React.PureComponent<Props> {
   private div = React.createRef<HTMLDivElement>();
 
-  componentDidUpdate(
-    prevProps: Readonly<Props>,
-    prevState: Readonly<{}>,
-    snapshot?: any
-  ) {
+  componentDidUpdate() {
     const div = this.div.current;
     if (!div) {
       return;

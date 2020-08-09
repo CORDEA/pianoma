@@ -11,7 +11,7 @@ import Status from "./Status";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-function App() {
+function App(): JSX.Element {
   return (
     <Provider store={store}>
       <div className="App">
